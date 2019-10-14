@@ -1,0 +1,61 @@
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Syrian War Map ⏤ Up to Date</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <nav>
+            <ul class="navigation">
+                <li>
+                    <a class="logo" href="#home">
+                        <img src="assets/images/logo.png" style="width: 160px;"/>
+                    </a>
+                </li>
+                <li class="right"><a href="mailto:elnoktech@gmail.com?subject=Contact%20Request%20-%20syrianwarmap.com">Contact</a></li>
+                <li class="right"><a href="mailto:elnoktech@gmail.com?subject=Advertisement%20Request%20-%20syrianwarmap.com">Advertisement</a></li>
+                <li class="right"><a href="https://elnok.tech" target="_blank" alt="Elnök Technologia">About Us</a></li>
+            </ul>
+        </nav>
+
+        <content>
+            <div id="news" class="news">
+                <h4>Latest News From Syria</h4>
+            </div>
+    
+            <div class="map">
+                <iframe src="http://umap.openstreetmap.fr/en/map/syrian-war-map_375944#8/35.115/40.770"></iframe>
+            </div>
+        </content>
+
+    </div>
+
+    <script>
+        function httpGet(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+
+        var news = httpGet("https://umap.openstreetmap.fr/en/datalayer/1018079/");
+        var parsedNews = JSON.parse(news);
+     
+        parsedNews.features.forEach(element => {
+            var paragraph = document.createElement("p");
+            paragraph.appendChild(document.createTextNode(element.properties.name));
+            document.getElementById("news").appendChild(paragraph);
+        });
+        
+    </script>
+
+</body>
+
+</html>
